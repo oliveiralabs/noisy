@@ -1,46 +1,24 @@
-import { useEffect, useState } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
+import styled from 'styled-components'
+import GlobalStyle from './GlobalStyle'
+import Header from './sections/header'
+import Main from './sections/main'
+
+const DivStyle = styled.div`
+  display: flex;
+  padding: 0 11%;
+`
 
 function App() {
-  return <></>
-}
-
-
-function AppX() {
-  let endpoint = 'https://oliveiralabs.github.io/noisy-sounds/index.json';
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [soundsArray, setSoundsArray] = useState([]);
-
-  useEffect(() => {
-    fetch(endpoint)
-      .then(res => res.json())
-      .then(result => {
-          setIsLoading(false);
-          setSoundsArray(result);
-        },
-
-        (error) => {
-          setIsLoading(false);
-          setError(error);
-        }
-      )
-  }, [])
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (isLoading) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <ul>
-        {soundsArray.map((item, index) => (
-          <li key={index}>
-            {item.name} {item.price}
-          </li>
-        ))}
-      </ul>
-    );
-  }
+  return (
+    <div>
+      <GlobalStyle />
+      <Header />
+      <DivStyle>
+        <Main />
+      </DivStyle>
+    </div>
+  )
 }
 
 export default App
