@@ -7,7 +7,7 @@ const HeaderContainerStyled = styled.div`
   position: fixed;
   background-color: white;
   width: 100%;
-
+  z-index: 1;
 `
 
 const HeaderStyled = styled.div`
