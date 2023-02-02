@@ -20,7 +20,9 @@ const DownloadStyled = styled.aside`
 const Download = () => {
   return (
     <DownloadStyled>
-      <h1>Download Noisy App 👉</h1>
+      {/* <h1>Download Noisy App 👉</h1> */}
+      <h1>+3000 sounds and GIFs 👉</h1>
+      
       <a href='https://play.google.com/store/apps/details?id=com.oliveiralabs.xpads' target={"_blank"}>
         <img 
           alt='Get Noisy on Google Play' 

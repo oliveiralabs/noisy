@@ -69,11 +69,11 @@ const SoundItem = (props) => {
           alt={soundTitle}
           className="lazyload" />
         <div className='overlay'>
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             play_circle
           </span>
 
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             open_in_browser
           </span>
         </div>
