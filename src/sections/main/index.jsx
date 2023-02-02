@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import Loading from './loading'
 import Error from './error'
 import styled from 'styled-components'
@@ -16,27 +15,9 @@ const SoundsContainerStyled = styled.div`
   grid-row-gap: 50px;
 `
 
-const Main = () => {
-  let endpoint = 'https://oliveiralabs.github.io/noisy-sounds/index.json';
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [soundsArray, setSoundsArray] = useState([]);
-
-  useEffect(() => {
-    fetch(endpoint)
-      .then(res => res.json())
-      .then(result => {
-        setIsLoading(false);
-        setSoundsArray(result);
-      },
-
-        (error) => {
-          setIsLoading(false);
-          setError(error);
-        }
-      )
-  }, [])
-
+const Main = (props) => {
+  const {error, isLoading, soundsArray} = props
+  
   let content;
 
   if (error) {
@@ -46,7 +27,7 @@ const Main = () => {
   } else {
     content = (
       <SoundsContainerStyled>
-       { soundsArray.map((item, index) => <SoundItem key={index} />) }
+       { soundsArray.map((item, index) => <SoundItem sound={item} key={index} />) }
       </SoundsContainerStyled>
     )
   }
