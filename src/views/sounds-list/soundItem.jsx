@@ -50,7 +50,6 @@ const SoundItemImgStyled = styled.div`
       }
     }
 
-
     .material-symbols-outlined {
       font-size: 70px;
       color: white;
@@ -78,15 +77,10 @@ const SoundItem = (props) => {
           className="lazyload" />
         <div className='overlay'>
           <a className="iconButtonMaterial" href="#">
-            <span className="material-symbols-outlined">
-              play_circle
-            </span>
+            <span className="material-symbols-outlined">play_circle</span>
           </a>
-
           <a className="iconButtonMaterial" href='gif'>
-            <span className="material-symbols-outlined">
-              open_in_browser
-            </span>
+            <span className="material-symbols-outlined">open_in_browser</span>
           </a>
         </div>
       </SoundItemImgStyled>

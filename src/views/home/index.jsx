@@ -23,12 +23,24 @@ function Home() {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [shownSoundsArray, setShownSoundsArray] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [userMadeSearch, setuserMadeSearch] = useState(false)
   let allSoundsArray = useRef([]);
 
   const pushRandomItems = (quantity) => {
     let randomItems = functions.shuffle(allSoundsArray.current).slice(0, quantity)
     let result = shownSoundsArray.concat(randomItems)
     setShownSoundsArray(result)
+  }
+
+  const filterSearch = (term) => {
+    if (term.length == 0) {
+      return shownSoundsArray
+    }
+
+    return allSoundsArray.current.filter(item => {
+      return item.title.includes(term)
+    });
   }
 
   useEffect(() => {
@@ -50,7 +62,9 @@ function Home() {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
       const reached = scrollTop + clientHeight
-      if (reached === scrollHeight) {
+      
+      // Só carrega no scroll se o usuário não tiver pesquisado ainda
+      if (!userMadeSearch && reached === scrollHeight) {
         pushRandomItems(4 * 10)
       }
     }
@@ -59,9 +73,15 @@ function Home() {
   return (
     <HomeContainerStyled onScroll={() => onScroll()} ref={listInnerRef}>
       <GlobalStyle />
-      <Header />
+      <Header onSearchTermChange={(e) => {
+        if (!userMadeSearch) {
+          setuserMadeSearch(true)
+        }
+        
+        setSearchTerm(e)
+      }} />
       <DivStyle>
-        <SoundsList soundsArray={shownSoundsArray} error={error} isLoading={isLoading} />
+        <SoundsList soundsArray={filterSearch(searchTerm)} error={error} isLoading={isLoading} />
       </DivStyle>
     </HomeContainerStyled>
   )

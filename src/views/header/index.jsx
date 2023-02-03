@@ -17,7 +17,7 @@ const HeaderStyled = styled.div`
     border-bottom: solid 1px ${() => colors.greyBackground};
 `
 
-const LogoStyled = styled.div`
+const LogoStyled = styled.a`
   outline: solid 1px ${() => colors.greyBackground};
   font-weight: bold;
   font-size: 40px;
@@ -73,18 +73,18 @@ const SearchInput = styled.div`
 
 `
 
-const Header = () => {
+const Header = (props) => {
   return (
     <HeaderContainerStyled>
     <HeaderStyled>
-      <LogoStyled>Noisy</LogoStyled>
+      <LogoStyled href="/">Noisy</LogoStyled>
       <SearchInput>
         <div className='icon'>
           <span className="material-symbols-outlined">
             search
           </span>
         </div>
-        <input type="text" placeholder="Search..." />
+        <input onChange={(e) => props.onSearchTermChange(e.target.value)} type="text" placeholder="Search..." />
       </SearchInput>
       <DownloadBtn />
     </HeaderStyled>
