@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
-import functions from '../src/utils/functions'
+import functions from '../../utils/functions'
 
 import styled from 'styled-components'
-import GlobalStyle from './GlobalStyle'
-import Header from './sections/header'
-import Main from './sections/main'
+import GlobalStyle from '../../GlobalStyle'
+import Header from '../header'
+import SoundsList from '../sounds-list'
 
-const AppContainerStyled = styled.div`
+const HomeContainerStyled = styled.div`
   overflow: auto;
   height: 100vh;
 `
@@ -16,7 +16,7 @@ const DivStyle = styled.div`
   padding: 0 11%;
 `
 
-function App() {
+function Home() {
   const listInnerRef = useRef();
 
   let endpoint = 'https://oliveiralabs.github.io/noisy-sounds/index2.json'
@@ -57,14 +57,14 @@ function App() {
   };
 
   return (
-    <AppContainerStyled onScroll={() => onScroll()} ref={listInnerRef}>
+    <HomeContainerStyled onScroll={() => onScroll()} ref={listInnerRef}>
       <GlobalStyle />
       <Header />
       <DivStyle>
-        <Main soundsArray={shownSoundsArray} error={error} isLoading={isLoading} />
+        <SoundsList soundsArray={shownSoundsArray} error={error} isLoading={isLoading} />
       </DivStyle>
-    </AppContainerStyled>
+    </HomeContainerStyled>
   )
 }
 
-export default App
+export default Home

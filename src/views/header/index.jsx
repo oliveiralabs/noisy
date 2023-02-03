@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import colors from '../../utils/colors'
-import Download from '../download'
-
+import DownloadBtn from './downloadBtn'
 
 const HeaderContainerStyled = styled.div`
   position: fixed;
@@ -87,7 +86,7 @@ const Header = () => {
         </div>
         <input type="text" placeholder="Search..." />
       </SearchInput>
-      <Download />
+      <DownloadBtn />
     </HeaderStyled>
     </HeaderContainerStyled>
   )

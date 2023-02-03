@@ -17,7 +17,7 @@ const DownloadStyled = styled.aside`
   }
 `
 
-const Download = () => {
+const DownloadBtn = () => {
   return (
     <DownloadStyled>
       {/* <h1>Download Noisy App 👉</h1> */}
@@ -34,4 +34,4 @@ const Download = () => {
 }
 
 
-export default Download
+export default DownloadBtn

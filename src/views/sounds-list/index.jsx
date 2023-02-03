@@ -3,19 +3,19 @@ import Error from './error'
 import styled from 'styled-components'
 import SoundItem from './soundItem'
 
-const MainStyled = styled.main`
+const ContainerStyled = styled.main`
   width: 100%;
   margin-top: 150px;
 `
 
-const SoundsContainerStyled = styled.div`
+const SoundsGridStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 50px;
   grid-row-gap: 50px;
 `
 
-const Main = (props) => {
+const SoundsList = (props) => {
   const {error, isLoading, soundsArray} = props
   
   let content;
@@ -26,13 +26,13 @@ const Main = (props) => {
     content = <Loading />;
   } else {
     content = (
-      <SoundsContainerStyled>
+      <SoundsGridStyled>
        { soundsArray.map((item, index) => <SoundItem sound={item} key={index} />) }
-      </SoundsContainerStyled>
+      </SoundsGridStyled>
     )
   }
 
-  return <MainStyled>{content}</MainStyled>
+  return <ContainerStyled>{content}</ContainerStyled>
 }
 
-export default Main
+export default SoundsList
