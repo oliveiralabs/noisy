@@ -19,7 +19,7 @@ const DivStyle = styled.div`
 function Home() {
   const listInnerRef = useRef();
 
-  let endpoint = 'https://oliveiralabs.github.io/noisy-sounds/index2.json'
+  let endpoint = 'https://oliveiralabs.github.io/noisy-sounds/index.json'
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [shownSoundsArray, setShownSoundsArray] = useState([])
@@ -39,7 +39,7 @@ function Home() {
     }
 
     return allSoundsArray.current.filter(item => {
-      return item.title.includes(term)
+      return item.title.toLowerCase().includes(term.toLowerCase())
     });
   }
 

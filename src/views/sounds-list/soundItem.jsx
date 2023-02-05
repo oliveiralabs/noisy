@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react"
 import styled from 'styled-components'
-import 'lazysizes';
-import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-import 'lazysizes/plugins/attrchange/ls.attrchange';
+import 'lazysizes'
+import 'lazysizes/plugins/parent-fit/ls.parent-fit'
+import 'lazysizes/plugins/attrchange/ls.attrchange'
+import functions from "../../utils/functions"
 
 
 const SoundItemStyled = styled.div`
@@ -17,7 +18,7 @@ const SoundItemStyled = styled.div`
 const SoundItemImgStyled = styled.div`
   background: url('loading.gif') no-repeat center;
   background-size: 25%;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.41);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.41);
   height: 200px;
   position: relative;
   margin-bottom: 12px;
@@ -41,12 +42,12 @@ const SoundItemImgStyled = styled.div`
     bottom: 0;
     display: none;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 
-    .iconButtonMaterial {
-      margin: 0 6%;
+    & .iconButtonMaterial {
       &:hover .material-symbols-outlined {
-        color: #a4acff;
+        color: #deffc8;
+        font-size: 80px;
       }
     }
 
@@ -54,7 +55,7 @@ const SoundItemImgStyled = styled.div`
       font-size: 70px;
       color: white;
       cursor: pointer;
-      transition: color 80ms linear;
+      transition: color 150ms linear, font-size 100ms;
     }
   }
 
@@ -66,27 +67,34 @@ const SoundItemImgStyled = styled.div`
 const SoundItem = (props) => {
   const ref = useRef()
   const soundTitle = props.sound.title
-  const endpoint = `https://oliveiralabs.github.io/noisy-sounds/content/${encodeURIComponent(soundTitle)}/gif.gif`
+  const endpoint = `https://oliveiralabs.github.io/noisy-sounds/content/${encodeURIComponent(soundTitle)}`
+  const detailsUrl = functions.slugify(soundTitle)
+
+  const playAudio = (url) => {
+    let audio = new Audio(url);
+    audio.play();
+  }
 
   return (
     <SoundItemStyled>
       <SoundItemImgStyled  ref={ref}>
         <img
-          data-src={endpoint}
+          data-src={`${endpoint}/gif.gif`}
           alt={soundTitle}
           className="lazyload" />
         <div className='overlay'>
-          <a className="iconButtonMaterial" href="#">
+          <a onClick={() => playAudio(`${endpoint}/sound.ogg`)} className="iconButtonMaterial">
             <span className="material-symbols-outlined">play_circle</span>
           </a>
-          <a className="iconButtonMaterial" href='gif'>
+          <a className="iconButtonMaterial" href={detailsUrl}>
             <span className="material-symbols-outlined">open_in_browser</span>
           </a>
         </div>
       </SoundItemImgStyled>
-      <a href='gif'>{soundTitle}</a>
+      <a href={detailsUrl}>{soundTitle}</a>
     </SoundItemStyled>
   )
 }
+
 
 export default SoundItem

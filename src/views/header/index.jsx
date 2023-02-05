@@ -12,6 +12,7 @@ const HeaderContainerStyled = styled.div`
 const HeaderStyled = styled.div`
     padding: 20px 11%;
     display: flex;
+    justify-content: space-between;
     height: 54px;
     align-items: center;
     border-bottom: solid 1px ${() => colors.greyBackground};
@@ -70,7 +71,6 @@ const SearchInput = styled.div`
       opacity: 1;
     }
   }
-
 `
 
 const Header = (props) => {
@@ -78,14 +78,17 @@ const Header = (props) => {
     <HeaderContainerStyled>
     <HeaderStyled>
       <LogoStyled href="/">Noisy</LogoStyled>
-      <SearchInput>
-        <div className='icon'>
-          <span className="material-symbols-outlined">
-            search
-          </span>
-        </div>
-        <input onChange={(e) => props.onSearchTermChange(e.target.value)} type="text" placeholder="Search..." />
-      </SearchInput>
+      {
+        props.hideSearchBar === true ? <></> : 
+        <SearchInput>
+          <div className='icon'>
+            <span className="material-symbols-outlined">
+              search
+            </span>
+          </div>
+          <input onChange={(e) => props.onSearchTermChange(e.target.value)} type="text" placeholder="Search..." />
+        </SearchInput>
+      }
       <DownloadBtn />
     </HeaderStyled>
     </HeaderContainerStyled>
