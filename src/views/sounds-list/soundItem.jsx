@@ -83,9 +83,9 @@ const SoundItem = (props) => {
   const [audio, setAudio] = useState()
 
   const stopAudio = () => {
-    audio.pause();
+    audio.pause()
     audio.currentTime = 0
-    setPlaying(false);
+    setPlaying(false)
   }
 
   // Triggered by setAudio inside togglePlaying method through 
