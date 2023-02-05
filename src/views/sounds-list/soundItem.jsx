@@ -63,6 +63,7 @@ const SoundItemImgStyled = styled.div`
     background-color: rgb(0, 255, 191);
     border-radius: 12px;
     width: ${props => props.progress}%;
+    transition: width 150ms linear;
     height: 20px;
     position: absolute;
     bottom: 0;
@@ -82,13 +83,24 @@ const SoundItem = (props) => {
   const [playing, setPlaying] = useState(false)
   const [audio, setAudio] = useState()
 
+  const stopAudio = () => {
+    audio.pause();
+    audio.currentTime = 0
+    setPlaying(false);
+  }
+
+  // Triggered by setAudio inside togglePlaying method through 
+  // useEffect changes monitoring " ...}, [audio])"
   useEffect(() => {
     if (audio == null) {
       return
     }
-    audio.addEventListener("timeupdate", () => {
-      setProgress((audio.currentTime / audio.duration) * 100);
-    })
+
+    audio.addEventListener("timeupdate", () => (
+      setProgress((audio.currentTime / audio.duration) * 100))
+    )
+
+    audio.addEventListener("ended", () => stopAudio())
 
     audio.play();
     setPlaying(true);
@@ -96,13 +108,9 @@ const SoundItem = (props) => {
 
   const togglePlaying = () => {
     if (!playing) {
-
       setAudio(new Audio(`${endpoint}/sound.ogg`))
-
     } else {
-      audio.pause();
-      audio.currentTime = 0
-      setPlaying(false);
+      stopAudio()
     }
   }
 

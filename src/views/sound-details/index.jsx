@@ -9,38 +9,40 @@ const ContainerStyled = styled.div`
 `
 
 const DivStyle = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  width: 50%;
+  height: 50%;
+  margin: 150px auto 0 auto;
 
   & .gifAudioContainer {
     display: flex;
-    align-items: center;
+    width: 100%;
+    height: 100%;
     justify-content: center;
-    flex-direction: column;
-    width: 50%;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  & img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
   }
 
   & .iconButtonMaterial {
-    position: absolute;
-  }
+    z-index: 1;
+    align-self: center;
 
-  & .material-symbols-outlined {
-    font-size: 8rem;
-    color: white;
-    transition: color 150ms linear, font-size 100ms;
-
-    &:hover {
-      color: #deffc8;
-      font-size: 9rem;
+    & .material-symbols-outlined {
+      font-size: 100px;
     }
   }
-
-  img {
-    width: 100%;
-  }
+  
 `
 
 function SoundDetails() {
