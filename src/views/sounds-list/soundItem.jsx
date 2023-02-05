@@ -75,17 +75,16 @@ const SoundItemImgStyled = styled.div`
 `
 
 const SoundItem = (props) => {
-  const soundTitle = props.sound.title
-  const endpoint = `https://oliveiralabs.github.io/noisy-sounds/content/${encodeURIComponent(soundTitle)}`
+  const {name, folder} = props.sound
+  const endpoint = `https://oliveiralabs.github.io/noisy-sounds/content/${folder}`
   const ref = useRef()
   const [progress, setProgress] = useState(0)
   const [playing, setPlaying] = useState(false)
-  const detailsUrl = functions.slugify(soundTitle)
   const [audio, setAudio] = useState(new Audio(`${endpoint}/sound.ogg`))
 
   audio.addEventListener("timeupdate", () => {
     setProgress((audio.currentTime / audio.duration) * 100);
-  });
+  })
 
   const togglePlaying = () => {
     if (!playing) {
@@ -103,20 +102,20 @@ const SoundItem = (props) => {
       <SoundItemImgStyled ref={ref} progress={progress}>
         <img
           data-src={`${endpoint}/gif.gif`}
-          alt={soundTitle}
+          alt={name}
           className="lazyload" />
         <div className="progress-overlay"></div>
         <div className='overlay'>
           <a onClick={togglePlaying} className="iconButtonMaterial">
             <span className="material-symbols-outlined">{playing ? 'stop_circle' : 'play_circle'}</span>
           </a>
-          <a className="iconButtonMaterial" href={detailsUrl}>
+          <a className="iconButtonMaterial" href={folder}>
             <span className="material-symbols-outlined">open_in_browser</span>
           </a>
         </div>
         
       </SoundItemImgStyled>
-      <a href={detailsUrl}>{soundTitle}</a>
+      <a href={folder}>{name}</a>
     </SoundItemStyled>
   )
 }
