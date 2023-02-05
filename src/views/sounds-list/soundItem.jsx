@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import styled from 'styled-components'
 import 'lazysizes'
 import 'lazysizes/plugins/parent-fit/ls.parent-fit'
@@ -80,16 +80,25 @@ const SoundItem = (props) => {
   const ref = useRef()
   const [progress, setProgress] = useState(0)
   const [playing, setPlaying] = useState(false)
-  const [audio, setAudio] = useState(new Audio(`${endpoint}/sound.ogg`))
+  const [audio, setAudio] = useState()
 
-  audio.addEventListener("timeupdate", () => {
-    setProgress((audio.currentTime / audio.duration) * 100);
-  })
+  useEffect(() => {
+    if (audio == null) {
+      return
+    }
+    audio.addEventListener("timeupdate", () => {
+      setProgress((audio.currentTime / audio.duration) * 100);
+    })
+
+    audio.play();
+    setPlaying(true);
+  }, [audio])
 
   const togglePlaying = () => {
     if (!playing) {
-      audio.play();
-      setPlaying(true);
+
+      setAudio(new Audio(`${endpoint}/sound.ogg`))
+
     } else {
       audio.pause();
       audio.currentTime = 0
