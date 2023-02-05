@@ -59,42 +59,66 @@ const SoundItemImgStyled = styled.div`
     }
   }
 
+  & .progress-overlay {
+    background-color: rgb(0, 255, 191);
+    border-radius: 12px;
+    width: ${props => props.progress}%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+  }
+
   &:hover .overlay {
     display: flex;
   }
 `
 
 const SoundItem = (props) => {
-  const ref = useRef()
   const soundTitle = props.sound.title
   const endpoint = `https://oliveiralabs.github.io/noisy-sounds/content/${encodeURIComponent(soundTitle)}`
+  const ref = useRef()
+  const [progress, setProgress] = useState(0)
+  const [playing, setPlaying] = useState(false)
   const detailsUrl = functions.slugify(soundTitle)
+  const [audio, setAudio] = useState(new Audio(`${endpoint}/sound.ogg`))
 
-  const playAudio = (url) => {
-    let audio = new Audio(url);
-    audio.play();
+  audio.addEventListener("timeupdate", () => {
+    setProgress((audio.currentTime / audio.duration) * 100);
+  });
+
+  const togglePlaying = () => {
+    if (!playing) {
+      audio.play();
+      setPlaying(true);
+    } else {
+      audio.pause();
+      audio.currentTime = 0
+      setPlaying(false);
+    }
   }
 
   return (
     <SoundItemStyled>
-      <SoundItemImgStyled  ref={ref}>
+      <SoundItemImgStyled ref={ref} progress={progress}>
         <img
           data-src={`${endpoint}/gif.gif`}
           alt={soundTitle}
           className="lazyload" />
+        <div className="progress-overlay"></div>
         <div className='overlay'>
-          <a onClick={() => playAudio(`${endpoint}/sound.ogg`)} className="iconButtonMaterial">
-            <span className="material-symbols-outlined">play_circle</span>
+          <a onClick={togglePlaying} className="iconButtonMaterial">
+            <span className="material-symbols-outlined">{playing ? 'stop_circle' : 'play_circle'}</span>
           </a>
           <a className="iconButtonMaterial" href={detailsUrl}>
             <span className="material-symbols-outlined">open_in_browser</span>
           </a>
         </div>
+        
       </SoundItemImgStyled>
       <a href={detailsUrl}>{soundTitle}</a>
     </SoundItemStyled>
   )
 }
-
 
 export default SoundItem
