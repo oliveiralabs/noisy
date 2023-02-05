@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import 'lazysizes'
 import 'lazysizes/plugins/parent-fit/ls.parent-fit'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
-import functions from "../../utils/functions"
 
 
 const SoundItemStyled = styled.div`

@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: ":soundTitle",
+    path: ":soundSlug",
     element: <SoundDetails />,
   },
 ]);

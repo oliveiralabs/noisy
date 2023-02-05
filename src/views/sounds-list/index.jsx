@@ -1,7 +1,7 @@
-import Loading from './loading'
 import Error from './error'
 import styled from 'styled-components'
 import SoundItem from './soundItem'
+import Loading from '../components/loading'
 
 const ContainerStyled = styled.main`
   width: 100%;
