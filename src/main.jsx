@@ -16,7 +16,9 @@ const router = createBrowserRouter([
     path: ":soundSlug",
     element: <SoundDetails />,
   },
-]);
+],
+  {basename: 'noisy'}, 
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
