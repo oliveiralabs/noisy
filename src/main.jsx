@@ -2,12 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import Home from './views/home'
 import SoundDetails from './views/sound-details'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Home />,
@@ -15,10 +16,6 @@ const router = createBrowserRouter([
   {
     path: ":soundSlug",
     element: <SoundDetails />,
-  },
-  {
-    path: "/test",
-    element: <h1>Test route!!</h1>,
   },
 ]);
 

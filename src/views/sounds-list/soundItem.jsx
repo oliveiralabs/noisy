@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import 'lazysizes'
 import 'lazysizes/plugins/parent-fit/ls.parent-fit'
@@ -125,13 +126,14 @@ const SoundItem = (props) => {
           <a onClick={togglePlaying} className="iconButtonMaterial">
             <span className="material-symbols-outlined">{playing ? 'stop_circle' : 'play_circle'}</span>
           </a>
-          <a className="iconButtonMaterial" href={folder}>
+          
+          <Link className="iconButtonMaterial" to={folder}>
             <span className="material-symbols-outlined">open_in_browser</span>
-          </a>
+          </Link>
         </div>
         
       </SoundItemImgStyled>
-      <a href={folder}>{name}</a>
+      <Link to={folder}>{name}</Link>
     </SoundItemStyled>
   )
 }
