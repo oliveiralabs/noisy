@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <SoundDetails />,
   },
   {
-    path: "test",
+    path: "/test",
     element: <h1>Test route!!</h1>,
   },
 ]);
