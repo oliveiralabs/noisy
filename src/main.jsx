@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     path: ":soundSlug",
     element: <SoundDetails />,
   },
+  {
+    path: "test",
+    element: <h1>Test route!!</h1>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

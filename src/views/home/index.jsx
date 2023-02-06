@@ -39,7 +39,7 @@ function Home() {
     }
 
     return allSoundsArray.current.filter(item => {
-      return item.title.toLowerCase().includes(term.toLowerCase())
+      return item.name.toLowerCase().includes(term.toLowerCase())
     });
   }
 
