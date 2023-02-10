@@ -95,6 +95,10 @@ function SoundDetails() {
   const [playing, setPlaying] = useState(false)
   const [audio, setAudio] = useState()
 
+  useEffect(() => {
+    document.title = soundTitle;
+  }, [soundTitle])
+
   const stopAudio = () => {
     audio.pause()
     audio.currentTime = 0
