@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import GlobalStyle from '../../GlobalStyle'
 import Header from '../header'
 import SoundsList from '../sounds-list'
+import DocumentMeta from 'react-document-meta'
 
 const HomeContainerStyled = styled.div`
   overflow: auto;
@@ -70,8 +71,21 @@ function Home() {
     }
   };
 
+  const meta = {
+    title: 'Noisy: memes, gifs e áudios engraçados para compartilhar com amigos.',
+    description: 'Noisyapp.com é um catálogo de memes, gifs e áudios engraçados para compartilhar com amigos. Encontre o conteúdo perfeito para enviar aos seus amigos ou para se divertir.',
+    canonical: window.location.href,
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'memes, gifs, áudios, engraçados, compartilhar, amigos, divertir, conteúdo'
+      }
+    }
+  }
+
   return (
     <HomeContainerStyled onScroll={() => onScroll()} ref={listInnerRef}>
+      <DocumentMeta {...meta} />
       <GlobalStyle />
       <Header onSearchTermChange={(e) => {
         if (!userMadeSearch) {
