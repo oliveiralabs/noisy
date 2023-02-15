@@ -78,7 +78,7 @@ function Home() {
     meta: {
       charset: 'utf-8',
       name: {
-        keywords: 'memes, gifs, áudios, engraçados, compartilhar, amigos, divertir, conteúdo'
+        keywords: 'google play, aplicativo, app, app download, baixar grátis, memes, gifs, áudios, engraçados'
       }
     }
   }
