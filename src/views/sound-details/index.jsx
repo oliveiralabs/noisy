@@ -4,6 +4,7 @@ import GlobalStyle from '../../GlobalStyle'
 import Header from '../header'
 import { useParams } from 'react-router-dom';
 import Loading from "../components/loading";
+import DocumentMeta from 'react-document-meta'
 
 
 const ContainerStyled = styled.div`
@@ -94,9 +95,23 @@ function SoundDetails() {
   const [progress, setProgress] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [audio, setAudio] = useState()
+  const [meta, setMeta] = useState()
 
   useEffect(() => {
-    document.title = soundTitle;
+    const m = {
+      title: soundTitle,
+      description: soundTitle,
+      canonical: window.location.href,
+      meta: {
+          charset: 'utf-8',
+          name: {
+              keywords: soundTitle.split(' ').join(', ')
+          }
+      }
+    }
+
+    setMeta(m)
+
   }, [soundTitle])
 
   const stopAudio = () => {
@@ -147,6 +162,7 @@ function SoundDetails() {
 
   const content = (
     <DivStyle>
+      <DocumentMeta {...meta} />
       <h1>{soundTitle}</h1>
       <div className="gifAudioContainer">
         <img src={`${endpoint}/gif.gif`} alt={soundTitle} />
